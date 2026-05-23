@@ -1,0 +1,33 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:item": {
+    "description": {
+      "identifier": "efz:syringe",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:display_name": {
+        "value": "item.efz:syringe"
+      },
+      "minecraft:icon": {
+        "textures": {
+          "default": "efz_syringe"
+        }
+      },
+      "minecraft:max_stack_size": 4,
+      "minecraft:use_modifiers": {
+        "use_duration": 1.2,
+        "movement_modifier": 0.45
+      },
+      "minecraft:food": {
+        "can_always_eat": true,
+        "nutrition": 0,
+        "saturation_modifier": 0
+      },
+      "minecraft:use_animation": "eat",
+      "efz:syringe": {}
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "format_version": 2,
+  "header": {
+    "description": "Created by Grand",
+    "name": "EFZ Texture",
+    "uuid": "dc363086-074b-4eef-8acf-47d5becdf5bf",
+    "version": [
+      0,
+      0,
+      7
+    ],
+    "min_engine_version": [
+      1,
+      21,
+      80
+    ]
+  },
+  "modules": [
+    {
+      "description": "Escape from Zombie",
+      "version": [
+        0,
+        0,
+        7
+      ],
+      "uuid": "906b5af1-6439-48cc-924d-e688d8e4c6cb",
+      "type": "resources"
+    }
+  ]
+}

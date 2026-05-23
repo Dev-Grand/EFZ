@@ -1,0 +1,23 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "efz:fantom",
+      "materials": {
+        "default": "skeleton"
+      },
+      "textures": {
+        "default": "textures/entity/efz/npcs/fantom"
+      },
+      "geometry": {
+        "default": "geometry.efz.humanoid_64"
+      },
+      "render_controllers": [
+        "controller.render.efz.npc"
+      ],
+      "scripts": {
+        "scale": 0.9375
+      }
+    }
+  }
+}

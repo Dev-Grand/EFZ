@@ -1,0 +1,24 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "EFZ Entities BP",
+    "description": "Behavior pack for EFZ custom zombies, husks, NPCs, and grave entities.",
+    "uuid": "cc46a2a9-b5ad-4fdd-bf80-f0187415bcde",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 21, 0]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "b53e3960-0548-403d-bd84-b18331c5773e",
+      "version": [1, 0, 0]
+    }
+  ],
+  "dependencies": [
+    {
+      "uuid": "ac0ddcbf-60e8-45a0-b18a-2fc37e312258",
+      "version": [1, 0, 0]
+    }
+  ]
+}
+

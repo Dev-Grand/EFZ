@@ -1,0 +1,65 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "minecraft:husk",
+      "min_engine_version": "1.8.0",
+      "materials": {
+        "default": "zombie"
+      },
+      "textures": {
+        "husk": "textures/entity/efz/husks/husk",
+        "husk1": "textures/entity/efz/husks/husk1",
+        "husk2": "textures/entity/efz/husks/husk2",
+        "husk3": "textures/entity/efz/husks/husk3",
+        "husk4": "textures/entity/efz/husks/husk4",
+        "husk5": "textures/entity/efz/husks/husk5",
+        "husk6": "textures/entity/efz/husks/husk6",
+        "husk7": "textures/entity/efz/husks/husk7",
+        "husk8": "textures/entity/efz/husks/husk8",
+        "husk9": "textures/entity/efz/husks/husk9",
+        "husk10": "textures/entity/efz/husks/husk10",
+        "husk11": "textures/entity/efz/husks/husk11",
+        "husk12": "textures/entity/efz/husks/husk12",
+        "husk13": "textures/entity/efz/husks/husk13",
+        "husk14": "textures/entity/efz/husks/husk14",
+        "husk15": "textures/entity/efz/husks/husk15",
+        "husk16": "textures/entity/efz/husks/husk16",
+        "husk17": "textures/entity/efz/husks/husk17",
+        "husk18": "textures/entity/efz/husks/husk18",
+        "husk19": "textures/entity/efz/husks/husk19",
+        "husk20": "textures/entity/efz/husks/husk20",
+        "husk21": "textures/entity/efz/husks/husk21",
+        "husk22": "textures/entity/efz/husks/husk22",
+        "husk23": "textures/entity/efz/husks/husk23",
+        "husk24": "textures/entity/efz/husks/husk24"
+      },
+      "geometry": {
+        "default": "geometry.efz.humanoid_64"
+      },
+      "spawn_egg": {
+        "texture": "spawn_egg_husk"
+      },
+      "scripts": {
+        "scale": "0.9375",
+        "pre_animation": [
+          "v.efz_skin = v.efz_skin_initialized ? v.efz_skin : math.die_roll_integer(1, 0, 24);",
+          "v.efz_skin_initialized = 1;",
+          "v.tcos0 = (math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed / v.gliding_speed_value) * 57.3;"
+        ],
+        "animate": [
+          {
+            "move": "query.modified_move_speed"
+          }
+        ]
+      },
+      "animations": {
+        "move": "animation.humanoid.move.v1.0"
+      },
+      "render_controllers": [
+        "controller.render.efz.husk"
+      ],
+      "enable_attachables": true
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "format_version": "1.21.50",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "efz:fantom",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false,
+      "spawn_egg": {
+        "base_color": "#202020",
+        "overlay_color": "#4a4a4a"
+      }
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [
+          "efz_npc",
+          "efz_black_market",
+          "efz_buyer"
+        ]
+      },
+      "minecraft:nameable": {},
+      "minecraft:health": {
+        "value": 100,
+        "max": 100
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.8
+      },
+      "minecraft:physics": {},
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "deals_damage": "no"
+        }
+      },
+      "minecraft:persistent": {},
+      "minecraft:interact": {
+        "interactions": [
+          {
+            "on_interact": {
+              "filters": {
+                "test": "is_family",
+                "subject": "other",
+                "value": "player"
+              }
+            },
+            "interact_text": "Trade"
+          }
+        ]
+      }
+    }
+  }
+}

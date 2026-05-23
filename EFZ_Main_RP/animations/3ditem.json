@@ -1,0 +1,28 @@
+{
+	"animations": {
+		"animation.3ditem.first_person_main_hand": {
+			"bones": {
+				"ar": {
+					"position": [-4, 20, -5],
+					"rotation": [-90, 120, 130],
+					"scale": 1
+				}
+			},
+			"loop": true
+		},
+		"animation.3ditem.third_person_main_hand": {
+			"loop": true,
+			"bones": {
+				"ar": {
+					"rotation": [90, 0, 0],
+					"position": [-5, 10, 1],
+					"scale": 0.5
+				},
+				"stick2": {
+					"position": [0, 0, 0.9]
+				}
+			}
+		}
+	},
+	"format_version": "1.8.0"
+}

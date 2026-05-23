@@ -1,0 +1,20 @@
+{
+  "format_version": "1.10.0",
+  "minecraft:client_entity": {
+    "description": {
+      "identifier": "efz:dead_body",
+      "materials": {
+        "default": "entity_alphatest"
+      },
+      "textures": {
+        "default": "textures/entity/efz/survivors/type_0"
+      },
+      "geometry": {
+        "default": "geometry.efz.dead_body_1024"
+      },
+      "render_controllers": [
+        "controller.render.efz.dead_body"
+      ]
+    }
+  }
+}

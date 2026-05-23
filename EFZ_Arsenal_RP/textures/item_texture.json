@@ -1,0 +1,12 @@
+{
+  "resource_pack_name": "EFZ Arsenal RP",
+  "texture_name": "atlas.items",
+  "texture_data": {
+    "efz_splint": {
+      "textures": "textures/items/efz/medicine/splint"
+    },
+    "efz_syringe": {
+      "textures": "textures/items/efz/medicine/syringe"
+    }
+  }
+}

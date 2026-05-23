@@ -1,0 +1,31 @@
+accessibility.disableTTS=Text To Speech disabled
+accessibility.enableTTS=Text To Speech enabled
+
+
+
+death.attack.anvil= 
+death.attack.arrow= 
+death.attack.arrow.item= 
+death.attack.cactus=%1$s died
+death.attack.cactus.player=%1$s died
+death.attack.drown= 
+death.attack.drown.player= 
+death.attack.explosion= 
+death.attack.explosion.player=  
+death.attack.fall= 
+death.attack.fall.player= 
+death.attack.fall.high= 
+death.attack.high.fall= 
+death.attack.fallingBlock= 
+death.attack.fireball= 
+death.attack.fireball.item= 
+death.attack.fireworks= 
+death.attack.flyIntoWall= 
+death.attack.generic= 
+death.attack.indirectMagic= 
+death.attack.indirectMagic.item= 
+death.attack.inFire= 
+death.attack.inFire.player=
+
+item.diamond_sword.name=Machete
+item.netherite_sword.name=Katana

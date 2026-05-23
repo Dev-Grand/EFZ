@@ -1,0 +1,39 @@
+{
+  "format_version": 2,
+  "header": {
+    "name": "EFZ Scripts BP",
+    "description": "Script pack for EFZ gameplay systems, economy, stats, UI, infection, broken legs, and graves.",
+    "uuid": "e3d6d548-4360-4320-9da8-2754f4f1e357",
+    "version": [1, 0, 0],
+    "min_engine_version": [1, 21, 0]
+  },
+  "modules": [
+    {
+      "type": "data",
+      "uuid": "a2e3964c-e035-4bf7-bc17-1675f77d63b6",
+      "version": [1, 0, 0]
+    },
+    {
+      "type": "script",
+      "language": "javascript",
+      "entry": "scripts/main.js",
+      "uuid": "44a994d7-f157-4950-82eb-25f40862579d",
+      "version": [1, 0, 0]
+    }
+  ],
+  "dependencies": [
+    {
+      "module_name": "@minecraft/server",
+      "version": "2.2.0"
+    },
+    {
+      "uuid": "cc46a2a9-b5ad-4fdd-bf80-f0187415bcde",
+      "version": [1, 0, 0]
+    },
+    {
+      "uuid": "c86e559e-5400-416c-99dc-69666979d78c",
+      "version": [1, 0, 0]
+    }
+  ]
+}
+

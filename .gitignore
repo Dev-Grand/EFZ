@@ -1,0 +1,27 @@
+# Windows / editor noise
+Thumbs.db
+Desktop.ini
+.DS_Store
+*.tmp
+*.temp
+*.bak
+*.old
+
+# Minecraft generated/package outputs
+*.mcpack
+*.mcaddon
+*.mcworld
+*.zip
+
+# Local logs and caches
+*.log
+logs/
+cache/
+.vscode/
+.idea/
+
+# Keep source packs and reference art, but ignore accidental copied world DBs.
+db/
+level.dat
+level.dat_old
+world_icon.jpeg
