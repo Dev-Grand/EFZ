@@ -12,6 +12,7 @@ The project is intentionally modular. Entity changes should stay in `EFZ_Entitie
 
 | Module | Behavior Pack | Resource Pack | Purpose |
 | --- | --- | --- | --- |
+|EFZ_Main | None | `EFZ_Main_RP` | Main texture pack of the map, Not related to the addons at all and will never be related.
 | EFZ_Entities | `EFZ_Entities_BP` | `EFZ_Entities_RP` | Custom zombies, husks, NPCs, grave visuals, entity models, textures, and visual UI definitions. |
 | EFZ_Arsenal | `EFZ_Arsenal_BP` | `EFZ_Arsenal_RP` | Splint item and future weapons, armor, food, medicine, and other trade goods. |
 | EFZ_Scripts | `EFZ_Scripts_BP` | none | Server gameplay logic using `@minecraft/server`. |
