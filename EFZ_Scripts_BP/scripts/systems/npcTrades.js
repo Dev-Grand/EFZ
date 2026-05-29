@@ -1,20 +1,9 @@
 import { ItemStack, system, world } from "@minecraft/server";
+import { ActionFormData } from "@minecraft/server-ui";
 import { SCOREBOARD_OBJECTIVES } from "../data/constants.js";
 
-const SELLER_NPCS = new Set([
-  "efz:monolith",
-  "efz:meudaz",
-  "efz:maverick"
-]);
+import { BUYER_TRADES, SELLER_TRADES } from "../data/trades.js";
 
-const BUYER_NPCS = new Set([
-  "efz:fantom",
-  "efz:razon"
-]);
-
-const DIAMOND_ID = "minecraft:diamond";
-const SELL_PRICE = 20;
-const BUY_PRICE = 35;
 const TRADE_COOLDOWN_TICKS = 10;
 const tradeCooldown = new Map();
 
@@ -98,8 +87,12 @@ function giveItem(player, typeId, amount) {
   return true;
 }
 
+function getPairKey(player, npc) {
+  return `${player.id}:${npc.id}`;
+}
+
 function isCoolingDown(player, npc) {
-  const key = `${player.id}:${npc.id}`;
+  const key = getPairKey(player, npc);
   const now = system.currentTick;
   const until = tradeCooldown.get(key) ?? 0;
 
@@ -111,31 +104,86 @@ function isCoolingDown(player, npc) {
   return false;
 }
 
-function buyDiamond(player) {
-  const money = getMoney(player);
-  if (money < SELL_PRICE) {
-    player.sendMessage(`You need $${SELL_PRICE} to buy 1 diamond.`);
-    return;
-  }
-
-  setMoney(player, money - SELL_PRICE);
-  giveItem(player, DIAMOND_ID, 1);
-  player.sendMessage(`Bought 1 diamond for $${SELL_PRICE}.`);
+function formatItem(itemId) {
+  return itemId.replace(/^.+:/, "").replaceAll("_", " ");
 }
 
-function sellDiamond(player) {
-  if (countItem(player, DIAMOND_ID) < 1) {
-    player.sendMessage("You need 1 diamond to sell.");
+function getNpcName(npc) {
+  return npc.typeId.replace("efz:", "").replaceAll("_", " ");
+}
+
+function buildSellerLabel(trade) {
+  return `Buy ${trade.amount} ${formatItem(trade.itemId)} - $${trade.price}`;
+}
+
+function buildBuyerLabel(trade) {
+  return `Sell ${trade.amount} ${formatItem(trade.itemId)} - $${trade.reward}`;
+}
+
+function handleSellerTrade(player, trade) {
+  const money = getMoney(player);
+  if (money < trade.price) {
+    player.sendMessage(`Need $${trade.price} for ${trade.amount} ${formatItem(trade.itemId)}.`);
     return;
   }
 
-  if (!removeItems(player, DIAMOND_ID, 1)) {
-    player.sendMessage("Could not remove the diamond from your inventory.");
+  setMoney(player, money - trade.price);
+  giveItem(player, trade.itemId, trade.amount);
+  player.sendMessage(`Bought ${trade.amount} ${formatItem(trade.itemId)} for $${trade.price}.`);
+}
+
+function handleBuyerTrade(player, trade) {
+  if (countItem(player, trade.itemId) < trade.amount) {
+    player.sendMessage(`Need ${trade.amount} ${formatItem(trade.itemId)} to sell here.`);
     return;
   }
 
-  setMoney(player, getMoney(player) + BUY_PRICE);
-  player.sendMessage(`Sold 1 diamond for $${BUY_PRICE}.`);
+  if (!removeItems(player, trade.itemId, trade.amount)) {
+    player.sendMessage(`Could not remove ${formatItem(trade.itemId)} from inventory.`);
+    return;
+  }
+
+  setMoney(player, getMoney(player) + trade.reward);
+  player.sendMessage(`Sold ${trade.amount} ${formatItem(trade.itemId)} for $${trade.reward}.`);
+}
+
+async function showTradeMenu(player, npc, sellerTrades, buyerTrades) {
+  const form = new ActionFormData()
+    .title(`Trade: ${getNpcName(npc)}`)
+    .body(`Balance: $${getMoney(player)}\nSelect one trade option:`);
+
+  const options = [];
+
+  for (const trade of sellerTrades) {
+    form.button(buildSellerLabel(trade));
+    options.push({ kind: "seller", trade });
+  }
+
+  for (const trade of buyerTrades) {
+    form.button(buildBuyerLabel(trade));
+    options.push({ kind: "buyer", trade });
+  }
+
+  if (!options.length) {
+    return;
+  }
+
+  const result = await form.show(player);
+  if (result.canceled || result.selection === undefined) {
+    return;
+  }
+
+  const selected = options[result.selection];
+  if (!selected) {
+    return;
+  }
+
+  if (selected.kind === "seller") {
+    handleSellerTrade(player, selected.trade);
+    return;
+  }
+
+  handleBuyerTrade(player, selected.trade);
 }
 
 export function registerNpcTradeSystem() {
@@ -147,13 +195,15 @@ export function registerNpcTradeSystem() {
       return;
     }
 
-    if (SELLER_NPCS.has(npc.typeId)) {
-      buyDiamond(player);
+    const sellerTrades = SELLER_TRADES[npc.typeId] ?? [];
+    const buyerTrades = BUYER_TRADES[npc.typeId] ?? [];
+
+    if (!sellerTrades.length && !buyerTrades.length) {
       return;
     }
 
-    if (BUYER_NPCS.has(npc.typeId)) {
-      sellDiamond(player);
-    }
+    void showTradeMenu(player, npc, sellerTrades, buyerTrades).catch((error) => {
+      console.warn(`[EFZ NPC Trades] Failed to show trade menu: ${error}`);
+    });
   });
 }
