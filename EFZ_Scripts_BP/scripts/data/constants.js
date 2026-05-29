@@ -13,7 +13,11 @@ export const SCOREBOARD_OBJECTIVES = {
   kills: "efz_kills",
   deaths: "efz_deaths",
   ui: "efz_ui",
-  skin: "efz_skin"
+  skin: "efz_skin",
+  zombieKills: "efz_zombie_kills",
+  moneyEarned: "efz_money_earned",
+  moneySpent: "efz_money_spent",
+  playtimeMinutes: "efz_playtime_min"
 };
 
 export const DEFAULT_PLAYER_MONEY = 0;
@@ -92,3 +96,30 @@ export const INFECTION_DISEASES = [
 export const INFECTION_TAG_PREFIX = "efz_infection_";
 
 export const INFECTION_TAGS = INFECTION_DISEASES.map((disease) => `${INFECTION_TAG_PREFIX}${disease.id}`);
+
+
+export const RADIATION_CONFIG = {
+  gasMaskItemId: "minecraft:turtle_helmet",
+  gasMaskProtectionMultiplier: 0.2,
+  exposurePerSecondNoMask: 1,
+  exposureDecayPerSecondOutsideZone: 0.5,
+  levelThresholdsSeconds: {
+    level1: 15 * 60,
+    level2: 20 * 60,
+    level3: 25 * 60
+  },
+  levelEffects: {
+    level1: [
+      { id: "nausea", amplifier: 0 }
+    ],
+    level2: [
+      { id: "nausea", amplifier: 0 },
+      { id: "slowness", amplifier: 1 }
+    ],
+    level3: [
+      { id: "nausea", amplifier: 0 },
+      { id: "slowness", amplifier: 2 },
+      { id: "poison", amplifier: 0 }
+    ]
+  }
+};

@@ -40,3 +40,15 @@ For living players, scripts assign each player a persistent random survivor type
 - Source zombies were TGA files in `My data/zombie/`; they were converted to PNG for safer Bedrock resource-pack use.
 - Source husks were already PNG files and were copied into the pack.
 - The generated variant list for future randomization is `EFZ_Scripts_BP/scripts/data/zombieVariants.generated.json`.
+
+## Random Skin Selector Validation
+
+Run this repo check after adding/removing zombie or husk skins to ensure all selector files stay in sync:
+
+- `node tools/validateZombieSkinSelector.mjs`
+
+It validates:
+- texture files on disk,
+- texture short-names in `entity/zombie.entity.json` and `entity/husk.entity.json`,
+- texture arrays in `render_controllers/zombie_husk.render_controllers.json`,
+- and `EFZ_Scripts_BP/scripts/data/zombieVariants.generated.json`.
