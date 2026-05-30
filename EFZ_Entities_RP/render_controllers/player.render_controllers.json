@@ -8,6 +8,8 @@
           "*": "Material.default"
         }
       ],
+      "is_hurt_color": {},
+      "on_fire_color": {},
       "textures": [
         "Texture.hero"
       ],
@@ -19,10 +21,19 @@
           "rightArm": true
         },
         {
+          "rightSleeve": true
+        },
+        {
           "leftArm": true
         },
         {
-          "rightSleeve": true
+          "leftSleeve": true
+        },
+        {
+          "leftArmArmor": "variable.chest_layer_visible && !query.has_cape"
+        },
+        {
+          "rightArmArmor": "variable.chest_layer_visible && !query.has_cape"
         }
       ]
     },
@@ -39,6 +50,39 @@
       "part_visibility": [
         {
           "*": true
+        },
+        {
+          "helmet": "variable.helmet_layer_visible"
+        },
+        {
+          "leftLegging": "variable.leg_layer_visible"
+        },
+        {
+          "rightLegging": "variable.leg_layer_visible"
+        },
+        {
+          "leftBoot": "variable.boot_layer_visible"
+        },
+        {
+          "rightBoot": "variable.boot_layer_visible"
+        },
+        {
+          "leftSock": "variable.boot_layer_visible && variable.leg_layer_visible"
+        },
+        {
+          "rightSock": "variable.boot_layer_visible && variable.leg_layer_visible"
+        },
+        {
+          "bodyArmor": "variable.chest_layer_visible && !query.has_cape"
+        },
+        {
+          "leftArmArmor": "variable.chest_layer_visible && !query.has_cape"
+        },
+        {
+          "rightArmArmor": "variable.chest_layer_visible && !query.has_cape"
+        },
+        {
+          "belt": "variable.chest_layer_visible && variable.leg_layer_visible"
         }
       ]
     },

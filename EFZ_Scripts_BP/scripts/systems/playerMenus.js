@@ -52,10 +52,17 @@ function isAdmin(player) {
   if (player.hasTag("efz_admin")) return true;
 
   try {
-    if (typeof player.isOp === "function") return player.isOp();
-    if (typeof player.isOp === "boolean") return player.isOp;
+    if (typeof player.isOp === "function" && player.isOp()) return true;
+    if (typeof player.isOp === "boolean" && player.isOp) return true;
   } catch {
-    return false;
+    // Continue through the more stable permission-level checks below.
+  }
+
+  try {
+    if (typeof player.playerPermissionLevel === "number" && player.playerPermissionLevel >= 2) return true;
+    if (typeof player.commandPermissionLevel === "number" && player.commandPermissionLevel >= 2) return true;
+  } catch {
+    // Some engine versions throw when reading permission fields from scripts.
   }
 
   return false;
@@ -290,7 +297,10 @@ export function registerPlayerMenuSystem() {
     if (message === "!efz") {
       event.cancel = true;
       system.run(() => {
-        void showPlayerMenu(player).catch((error) => console.warn(`[EFZ Menu] Failed: ${error}`));
+        void showPlayerMenu(player).catch((error) => {
+          console.warn(`[EFZ Menu] Failed: ${error}`);
+          player.sendMessage("§c[EFZ] Menu failed to open. Please close chat and try !efz again.");
+        });
       });
       return;
     }
@@ -303,7 +313,10 @@ export function registerPlayerMenuSystem() {
           return;
         }
 
-        void showAdminMenu(player).catch((error) => console.warn(`[EFZ Admin] Failed: ${error}`));
+        void showAdminMenu(player).catch((error) => {
+          console.warn(`[EFZ Admin] Failed: ${error}`);
+          player.sendMessage("§c[EFZ] Admin menu failed to open. Try the text commands instead.");
+        });
       });
       return;
     }

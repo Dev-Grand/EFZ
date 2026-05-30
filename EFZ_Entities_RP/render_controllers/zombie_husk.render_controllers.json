@@ -159,7 +159,7 @@
           ]
         }
       },
-      "geometry": "Geometry.default",
+      "geometry": "query.is_baby ? Geometry.baby : Geometry.default",
       "is_hurt_color": {},
       "on_fire_color": {},
       "materials": [
@@ -203,7 +203,7 @@
           ]
         }
       },
-      "geometry": "Geometry.default",
+      "geometry": "query.is_baby ? Geometry.baby : Geometry.default",
       "is_hurt_color": {},
       "on_fire_color": {},
       "materials": [

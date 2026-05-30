@@ -1,5 +1,5 @@
 import { system, world } from "@minecraft/server";
-import { getRadiationStageForPlayer } from "./radiation.js";
+import { getRadiationStatusForPlayer } from "./radiation.js";
 import {
   DEFAULT_PLAYER_MONEY,
   EFZ_UI_UPDATE_INTERVAL_TICKS,
@@ -77,8 +77,12 @@ function buildStatusSegments(player) {
   if (INFECTION_TAGS.some((tag) => player.hasTag(tag))) statuses.push("INFECTION");
   if (player.hasTag(BROKEN_LEG_TAG)) statuses.push("BROKEN LEG");
 
-  const radStage = getRadiationStageForPlayer(player.id);
-  if (radStage > 0) statuses.push(`RADIATION L${radStage}`);
+  const radiation = getRadiationStatusForPlayer(player.id);
+  if (radiation.stage > 0) {
+    statuses.push(`RADIATION L${radiation.stage}`);
+  } else if (radiation.inZone) {
+    statuses.push("RADIATION");
+  }
 
   return statuses;
 }

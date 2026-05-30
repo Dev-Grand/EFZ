@@ -23,7 +23,7 @@ Visual resources for EFZ entities.
 
 The current `type_0` through `type_6` textures are 1024x512 classic humanoid skin maps. They are suitable for EFZ dead-body entities and other humanoid custom entities.
 
-For living players, scripts assign each player a persistent random survivor type. Fully forcing the player's visible account skin requires a player-render resource override, which is more fragile than normal custom entities and should be tested separately before relying on it for the server.
+For living players, scripts still assign each player a persistent random survivor type for corpse/dead-body matching. The risky `minecraft:player` client override is intentionally disabled for now because it made live players invisible during mobile testing. Fully forcing visible living-player skins should be handled later as a separate, dedicated rendering pass.
 
 ## NPC Textures
 
@@ -39,6 +39,7 @@ For living players, scripts assign each player a persistent random survivor type
 - Husks: 25 PNG textures in `textures/entity/efz/husks/`.
 - Source zombies were TGA files in `My data/zombie/`; they were converted to PNG for safer Bedrock resource-pack use.
 - Source husks were already PNG files and were copied into the pack.
+- Zombie and husk client entities reuse the vanilla zombie/husk geometry and animation-controller set, then swap only the texture through the EFZ render-controller arrays. This keeps random skins while avoiding purple/missing-animation regressions.
 - The generated variant list for future randomization is `EFZ_Scripts_BP/scripts/data/zombieVariants.generated.json`.
 
 ## Random Skin Selector Validation

@@ -1,4 +1,4 @@
-import { EquipmentSlot, system, world } from "@minecraft/server";
+import { system, world } from "@minecraft/server";
 import { RADIATION_CONFIG } from "../data/constants.js";
 import { RADIATION_ZONES } from "../data/radiationZones.js";
 
@@ -22,12 +22,16 @@ function hasGasMask(player) {
   const equippable = player.getComponent("minecraft:equippable");
   if (!equippable) return false;
 
-  try {
-    const headItem = equippable.getEquipment(EquipmentSlot.Head);
-    return headItem?.typeId === RADIATION_CONFIG.gasMaskItemId;
-  } catch {
-    return false;
+  for (const slot of ["Head", "head"]) {
+    try {
+      const headItem = equippable.getEquipment(slot);
+      if (headItem?.typeId === RADIATION_CONFIG.gasMaskItemId) return true;
+    } catch {
+      // Older/newer Script API builds disagree on enum-vs-string equipment slot values.
+    }
   }
+
+  return false;
 }
 
 function getStage(exposureSeconds) {
@@ -102,4 +106,13 @@ export function registerRadiationSystem() {
 export function getRadiationStageForPlayer(playerId) {
   const exposure = exposureByPlayerId.get(playerId) ?? 0;
   return getStage(exposure);
+}
+
+export function getRadiationStatusForPlayer(playerId) {
+  const exposure = exposureByPlayerId.get(playerId) ?? 0;
+  return {
+    exposureSeconds: exposure,
+    inZone: insideZoneByPlayerId.get(playerId) ?? false,
+    stage: getStage(exposure)
+  };
 }

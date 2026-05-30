@@ -55,7 +55,7 @@ JavaScript gameplay logic for the EFZ server.
   - `efz_money`: editable digital money balance.
   - `efz_kills`: player kills.
   - `efz_deaths`: player deaths.
-  - Stats are rendered per-player in the action bar to stay clean on mobile and avoid global sidebar conflicts.
+  - Detailed stats stay in the `!efz` Statistics menu; the live action bar only shows money plus active conditions to avoid PvP kill-confirmation leaks.
 - NPC trade menus and transactions (configured in `scripts/data/trades.js`).
   - Monolith sells black market secret items, weapons, and armor.
   - Fantom buys rare and secret items for money.
@@ -76,12 +76,13 @@ JavaScript gameplay logic for the EFZ server.
     - Level 2 after 1200 seconds (20 min).
     - Level 3 after 1500 seconds (25 min).
   - Entry/exit title messages are shown when crossing zone boundary.
+  - Action bar shows `RADIATION` immediately while inside a zone, then `RADIATION L1/L2/L3` after exposure reaches a stage.
 - Player chat menus:
   - `!efz` opens a 5-button public menu (Information, Payments, Statistics, Patch Notes, EFZ).
   - Information is the main menu button and contains gameplay details, rules, and quick help tips.
   - Patch Notes renders from `scripts/data/patchNotes.js` so latest features can be updated without menu code edits.
   - EFZ links render from `scripts/data/links.js` and currently display Soon.
-  - `!efzadmin` opens admin command help for OP users or players tagged `efz_admin`.
+  - `!efzadmin` opens admin command help for OP users or players tagged `efz_admin`. If OP detection is inconsistent on a host, use `/tag <player> add efz_admin` as the reliable admin setup.
   - Admin economy/stat commands:
     - `!efz add money <amount> <user>`
     - `!efz remove money <amount> <user>`
