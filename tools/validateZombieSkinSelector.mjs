@@ -19,6 +19,11 @@ function listTextureStems(dir) {
     .map((name) => name.slice(0, -4));
 }
 
+function texturePathStems(textures) {
+  return Object.values(textures)
+    .map((texturePath) => texturePath.split("/").pop());
+}
+
 function assert(condition, message) {
   if (!condition) {
     throw new Error(message);
@@ -43,18 +48,25 @@ function compareSet(label, a, b) {
 function validateFamily({ family, entityPath, textureDir, rcArrayPath, expectedMaxIndex, generatedList }) {
   const entity = readJson(entityPath);
   const rcJson = readJson(paths.renderControllers);
-  const textures = getObjectKeys(entity["minecraft:client_entity"].description.textures);
+  const textureObject = entity["minecraft:client_entity"].description.textures;
+  const textures = getObjectKeys(textureObject);
+  const textureFiles = texturePathStems(textureObject);
   const onDisk = listTextureStems(textureDir);
 
   const controller = rcJson.render_controllers[rcArrayPath.controller];
   const arrayValues = controller.arrays.textures[rcArrayPath.array].map((value) => value.replace("Texture.", ""));
 
-  compareSet(`${family} entity textures vs files`, textures, onDisk);
+  compareSet(`${family} entity texture paths vs files`, textureFiles, onDisk);
   compareSet(`${family} render array vs entity textures`, arrayValues, textures);
-  compareSet(`${family} generated variants vs entity textures`, generatedList, textures);
+  compareSet(`${family} generated variants vs texture files`, generatedList, textureFiles);
 
   const preAnimation = entity["minecraft:client_entity"].description.scripts.pre_animation.join("\n");
-  assert(preAnimation.includes(`math.die_roll_integer(1, 0, ${expectedMaxIndex})`), `${family} pre_animation index range is not 0..${expectedMaxIndex}`);
+  assert(
+    preAnimation.includes(`math.die_roll_integer(1, 0, ${expectedMaxIndex})`) ||
+      preAnimation.includes(`Math.random(0,${expectedMaxIndex})`) ||
+      preAnimation.includes(`Math.random(0, ${expectedMaxIndex})`),
+    `${family} pre_animation index range is not 0..${expectedMaxIndex}`
+  );
 }
 
 function main() {
@@ -64,7 +76,7 @@ function main() {
     family: "zombie",
     entityPath: paths.zombieEntity,
     textureDir: paths.zombieTexturesDir,
-    rcArrayPath: { controller: "controller.render.efz.zombie", array: "Array.efz_zombie_skins" },
+    rcArrayPath: { controller: "controller.render.zombie", array: "Array.skins" },
     expectedMaxIndex: 150,
     generatedList: generated.zombies
   });
@@ -73,7 +85,7 @@ function main() {
     family: "husk",
     entityPath: paths.huskEntity,
     textureDir: paths.huskTexturesDir,
-    rcArrayPath: { controller: "controller.render.efz.husk", array: "Array.efz_husk_skins" },
+    rcArrayPath: { controller: "controller.render.husk", array: "Array.skins" },
     expectedMaxIndex: 24,
     generatedList: generated.husks
   });
