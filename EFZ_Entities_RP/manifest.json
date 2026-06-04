@@ -4,14 +4,14 @@
     "name": "EFZ Entities RP",
     "description": "Resource pack for EFZ custom entity models, textures, animations, and UI assets.",
     "uuid": "ac0ddcbf-60e8-45a0-b18a-2fc37e312258",
-    "version": [1, 0, 0],
+    "version": [1, 0, 4],
     "min_engine_version": [1, 21, 0]
   },
   "modules": [
     {
       "type": "resources",
       "uuid": "c658c964-6c8f-4626-b89f-e0e111fddd2a",
-      "version": [1, 0, 0]
+      "version": [1, 0, 4]
     }
   ]
 }

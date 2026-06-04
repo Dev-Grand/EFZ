@@ -41,8 +41,8 @@ export function getSurvivorSkinType(player) {
   return skinType;
 }
 
-export function spawnDeadBodyForPlayer(player, location = player.location) {
-  const body = player.dimension.spawnEntity(DEAD_BODY_ENTITY_ID, location);
+export function spawnDeadBodyForPlayer(player, location = player.location, dimension = player.dimension) {
+  const body = dimension.spawnEntity(DEAD_BODY_ENTITY_ID, location);
   const skinType = getSurvivorSkinType(player);
 
   body.setProperty("efz:skin_type", skinType);

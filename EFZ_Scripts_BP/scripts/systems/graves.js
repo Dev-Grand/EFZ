@@ -12,7 +12,31 @@ import { spawnDeadBodyForPlayer } from "./survivorSkins.js";
 const GRAVE_LIFETIME_TICKS = 15 * 60 * 20;
 const LOOT_TAG_PREFIX = "efz_loot|";
 const LOOT_PAGE_SIZE = 45;
+const KEEP_INVENTORY_REFRESH_TICKS = 20 * 30;
+const DEATH_DROP_ABSORB_RADIUS = 4;
 const pendingRespawnClear = new Set();
+
+function enforceKeepInventory() {
+  runCommand(world.getDimension("overworld"), "gamerule keepInventory true", "keepInventory");
+}
+
+function runCommand(target, command, context) {
+  try {
+    if (typeof target.runCommand === "function") {
+      target.runCommand(command);
+      return;
+    }
+
+    if (typeof target.runCommandAsync === "function") {
+      target.runCommandAsync(command).catch((error) => {
+        console.warn(`[EFZ Graves] Failed command ${context}: ${error}`);
+      });
+      return;
+    }
+  } catch (error) {
+    console.warn(`[EFZ Graves] Failed command ${context}: ${error}`);
+  }
+}
 
 function getInventory(player) {
   return player.getComponent("minecraft:inventory")?.container;
@@ -127,6 +151,15 @@ function writeLootToBody(body, items) {
   }
 }
 
+function appendLootToBody(body, items) {
+  if (!items.length) return;
+  const loot = readLootFromBody(body);
+  for (const item of items) {
+    loot.push({ typeId: item.typeId, amount: item.amount });
+  }
+  overwriteBodyLoot(body, loot);
+}
+
 function readLootFromBody(body) {
   const loot = [];
   for (const tag of body.getTags()) {
@@ -156,14 +189,45 @@ function despawnBody(body) {
   catch {}
 }
 
-function spawnLootBody(player, items) {
-  const body = spawnDeadBodyForPlayer(player);
+function spawnLootBody(player, location, dimension, items) {
+  const body = spawnDeadBodyForPlayer(player, location, dimension);
   writeLootToBody(body, items);
 
   system.runTimeout(() => {
     clearLootTags(body);
     despawnBody(body);
   }, GRAVE_LIFETIME_TICKS);
+
+  return body;
+}
+
+function getDroppedItemStack(entity) {
+  try {
+    return entity.getComponent("minecraft:item")?.itemStack;
+  } catch {
+    return undefined;
+  }
+}
+
+function absorbDeathDropsIntoBody(body, dimension, location) {
+  const absorbed = [];
+  const itemEntities = dimension.getEntities({
+    type: "minecraft:item",
+    location,
+    maxDistance: DEATH_DROP_ABSORB_RADIUS
+  });
+
+  for (const entity of itemEntities) {
+    const item = getDroppedItemStack(entity);
+    if (!item) continue;
+
+    absorbed.push(cloneItem(item));
+    try { entity.remove(); }
+    catch {}
+  }
+
+  appendLootToBody(body, absorbed.filter(Boolean));
+  return absorbed.length;
 }
 
 async function showLootMenu(player, body, page = 0) {
@@ -246,18 +310,39 @@ async function showLootMenu(player, body, page = 0) {
 }
 
 export function registerGraveSystem() {
+  system.run(enforceKeepInventory);
+  system.runInterval(enforceKeepInventory, KEEP_INVENTORY_REFRESH_TICKS);
+
   world.afterEvents.entityDie.subscribe((event) => {
-    const player = event.deadEntity;
-    if (player?.typeId !== "minecraft:player") return;
+    try {
+      const player = event.deadEntity;
+      if (player?.typeId !== "minecraft:player") return;
 
-    const items = [
-      ...captureAndClearInventory(player),
-      ...captureEquippedItems(player)
-    ];
-    pendingRespawnClear.add(player.id);
-    clearEfzStatusEffects(player);
+      const deathLocation = { ...player.location };
+      const deathDimension = player.dimension;
+      const items = [
+        ...captureAndClearInventory(player),
+        ...captureEquippedItems(player)
+      ];
+      pendingRespawnClear.add(player.id);
+      clearEfzStatusEffects(player);
 
-    if (items.length > 0) spawnLootBody(player, items);
+      const body = spawnLootBody(player, deathLocation, deathDimension, items);
+      system.runTimeout(() => {
+        try {
+          const absorbed = absorbDeathDropsIntoBody(body, deathDimension, deathLocation);
+          if (items.length > 0 || absorbed > 0) {
+            player.sendMessage("[EFZ] Your loot was moved to your body.");
+          } else {
+            player.sendMessage("[EFZ] Your body was left at your death location.");
+          }
+        } catch (error) {
+          console.warn(`[EFZ Graves] Failed to absorb death drops: ${error}`);
+        }
+      }, 2);
+    } catch (error) {
+      console.warn(`[EFZ Graves] Failed player death loot flow: ${error}`);
+    }
   });
 
   world.afterEvents.playerSpawn.subscribe((event) => {

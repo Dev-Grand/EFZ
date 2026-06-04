@@ -1,0 +1,28 @@
+{
+  "format_version": "1.21.90",
+  "minecraft:item": {
+    "description": {
+      "identifier": "efz:gear_menu",
+      "menu_category": {
+        "category": "equipment"
+      }
+    },
+    "components": {
+      "minecraft:display_name": {
+        "value": "item.efz:gear_menu"
+      },
+      "minecraft:icon": "efz_gear_menu",
+      "minecraft:max_stack_size": 1,
+      "minecraft:allow_off_hand": false,
+      "minecraft:can_destroy_in_creative": false,
+      "minecraft:cooldown": {
+        "category": "efz_gear_menu",
+        "duration": 0.75
+      },
+      "minecraft:interact_button": "EFZ",
+      "minecraft:custom_components": [
+        "efz:gear_menu"
+      ]
+    }
+  }
+}

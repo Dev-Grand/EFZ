@@ -7,6 +7,684 @@
     },
     "efz_syringe": {
       "textures": "textures/items/efz/medicine/syringe"
+    },
+    "efz_gear_menu": {
+      "textures": "textures/items/efz/menu/gear"
+    },
+    "army_artic": {
+      "textures": "textures/items/armor/army_artic"
+    },
+    "army_desert": {
+      "textures": "textures/items/armor/army_desert"
+    },
+    "army_woodland": {
+      "textures": "textures/items/armor/army_woodland"
+    },
+    "assault_helmet_black": {
+      "textures": "textures/items/armor/assault_helmet_black"
+    },
+    "assault_helmet_olive": {
+      "textures": "textures/items/armor/assault_helmet_olive"
+    },
+    "assault_vest_black": {
+      "textures": "textures/items/armor/assault_vest_black"
+    },
+    "assault_vest_olive": {
+      "textures": "textures/items/armor/assault_vest_olive"
+    },
+    "balaclava_black": {
+      "textures": "textures/items/armor/balaclava_black"
+    },
+    "ballistic_black": {
+      "textures": "textures/items/armor/ballistic_black"
+    },
+    "ballistic_green": {
+      "textures": "textures/items/armor/ballistic_green"
+    },
+    "ballistic_tan": {
+      "textures": "textures/items/armor/ballistic_tan"
+    },
+    "ballistic_white": {
+      "textures": "textures/items/armor/ballistic_white"
+    },
+    "bandana_blue": {
+      "textures": "textures/items/armor/bandana_blue"
+    },
+    "bandana_green": {
+      "textures": "textures/items/armor/bandana_green"
+    },
+    "bandana_red": {
+      "textures": "textures/items/armor/bandana_red"
+    },
+    "bdu_artic_bottom": {
+      "textures": "textures/items/clothing/lower/bdu_artic_bottom"
+    },
+    "bdu_artic_top": {
+      "textures": "textures/items/clothing/top/bdu_artic_top"
+    },
+    "bdu_desert_bottom": {
+      "textures": "textures/items/clothing/lower/bdu_desert_bottom"
+    },
+    "bdu_desert_top": {
+      "textures": "textures/items/clothing/top/bdu_desert_top"
+    },
+    "bdu_woodland_bottom": {
+      "textures": "textures/items/clothing/lower/bdu_woodland_bottom"
+    },
+    "bdu_woodland_top": {
+      "textures": "textures/items/clothing/top/bdu_woodland_top"
+    },
+    "beanie_black": {
+      "textures": "textures/items/armor/beanie_black"
+    },
+    "beanie_brown": {
+      "textures": "textures/items/armor/beanie_brown"
+    },
+    "beanie_olive": {
+      "textures": "textures/items/armor/beanie_olive"
+    },
+    "beanie_white": {
+      "textures": "textures/items/armor/beanie_white"
+    },
+    "beret_blue": {
+      "textures": "textures/items/armor/beret_blue"
+    },
+    "beret_green": {
+      "textures": "textures/items/armor/beret_green"
+    },
+    "beret_red": {
+      "textures": "textures/items/armor/beret_red"
+    },
+    "biker_black": {
+      "textures": "textures/items/armor/biker_black"
+    },
+    "biker_blue": {
+      "textures": "textures/items/armor/biker_blue"
+    },
+    "biker_red": {
+      "textures": "textures/items/armor/biker_red"
+    },
+    "biker_vest": {
+      "textures": "textures/items/armor/biker_vest"
+    },
+    "biker_vest_skull": {
+      "textures": "textures/items/armor/biker_vest_skull"
+    },
+    "biker_white": {
+      "textures": "textures/items/armor/biker_white"
+    },
+    "biker_yellow": {
+      "textures": "textures/items/armor/biker_yellow"
+    },
+    "boonie_artic": {
+      "textures": "textures/items/armor/boonie_artic"
+    },
+    "boonie_black": {
+      "textures": "textures/items/armor/boonie_black"
+    },
+    "boonie_desert": {
+      "textures": "textures/items/armor/boonie_desert"
+    },
+    "boonie_green": {
+      "textures": "textures/items/armor/boonie_green"
+    },
+    "boonie_tan": {
+      "textures": "textures/items/armor/boonie_tan"
+    },
+    "boonie_woodland": {
+      "textures": "textures/items/armor/boonie_woodland"
+    },
+    "cap_black": {
+      "textures": "textures/items/armor/cap_black"
+    },
+    "cap_blue": {
+      "textures": "textures/items/armor/cap_blue"
+    },
+    "cap_green": {
+      "textures": "textures/items/armor/cap_green"
+    },
+    "cap_red": {
+      "textures": "textures/items/armor/cap_red"
+    },
+    "cargo_black": {
+      "textures": "textures/items/clothing/lower/cargo_black"
+    },
+    "cargo_brown": {
+      "textures": "textures/items/clothing/lower/cargo_brown"
+    },
+    "cargo_green": {
+      "textures": "textures/items/clothing/lower/cargo_green"
+    },
+    "cargo_tan": {
+      "textures": "textures/items/clothing/lower/cargo_tan"
+    },
+    "cargo_white": {
+      "textures": "textures/items/clothing/lower/cargo_white"
+    },
+    "chainmail_bottom": {
+      "textures": "textures/items/clothing/lower/chainmail_bottom"
+    },
+    "chainmail_top": {
+      "textures": "textures/items/clothing/top/chainmail_top"
+    },
+    "chest_brown": {
+      "textures": "textures/items/armor/chest_brown"
+    },
+    "chest_green": {
+      "textures": "textures/items/armor/chest_green"
+    },
+    "chest_navy": {
+      "textures": "textures/items/armor/chest_navy"
+    },
+    "chest_tan": {
+      "textures": "textures/items/armor/chest_tan"
+    },
+    "chest_white": {
+      "textures": "textures/items/armor/chest_white"
+    },
+    "clown_bottom": {
+      "textures": "textures/items/clothing/lower/clown_bottom"
+    },
+    "clown_top": {
+      "textures": "textures/items/clothing/top/clown_top"
+    },
+    "clown_wig": {
+      "textures": "textures/items/armor/clown_wig"
+    },
+    "combat_olive": {
+      "textures": "textures/items/armor/combat_olive"
+    },
+    "combat_tan": {
+      "textures": "textures/items/armor/combat_tan"
+    },
+    "combat_white": {
+      "textures": "textures/items/armor/combat_white"
+    },
+    "cowboy_black": {
+      "textures": "textures/items/armor/cowboy_black"
+    },
+    "cowboy_brown": {
+      "textures": "textures/items/armor/cowboy_brown"
+    },
+    "cowboy_white": {
+      "textures": "textures/items/armor/cowboy_white"
+    },
+    "crusader_top": {
+      "textures": "textures/items/clothing/top/crusader_top"
+    },
+    "durag_black": {
+      "textures": "textures/items/armor/durag_black"
+    },
+    "durag_brown": {
+      "textures": "textures/items/armor/durag_brown"
+    },
+    "firefighter_bottom": {
+      "textures": "textures/items/clothing/lower/firefighter_bottom"
+    },
+    "firefighter_hat": {
+      "textures": "textures/items/armor/firefighter_hat"
+    },
+    "firefighter_top": {
+      "textures": "textures/items/clothing/top/firefighter_top"
+    },
+    "flannel_blue": {
+      "textures": "textures/items/clothing/top/flannel_blue"
+    },
+    "flannel_gray": {
+      "textures": "textures/items/clothing/top/flannel_gray"
+    },
+    "flannel_green": {
+      "textures": "textures/items/clothing/top/flannel_green"
+    },
+    "flannel_red": {
+      "textures": "textures/items/clothing/top/flannel_red"
+    },
+    "flannel_white": {
+      "textures": "textures/items/clothing/top/flannel_white"
+    },
+    "flat_black": {
+      "textures": "textures/items/armor/flat_black"
+    },
+    "flat_brown": {
+      "textures": "textures/items/armor/flat_brown"
+    },
+    "gasmask_black": {
+      "textures": "textures/items/armor/gasmask_black"
+    },
+    "gasmask_tactical": {
+      "textures": "textures/items/armor/gasmask_tactical"
+    },
+    "gasmask_white": {
+      "textures": "textures/items/armor/gasmask_white"
+    },
+    "ghillie_drygrass_bottom": {
+      "textures": "textures/items/clothing/lower/ghillie_drygrass_bottom"
+    },
+    "ghillie_drygrass_top": {
+      "textures": "textures/items/clothing/top/ghillie_drygrass_top"
+    },
+    "ghillie_forest_bottom": {
+      "textures": "textures/items/clothing/lower/ghillie_forest_bottom"
+    },
+    "ghillie_forest_top": {
+      "textures": "textures/items/clothing/top/ghillie_forest_top"
+    },
+    "ghillie_snow_bottom": {
+      "textures": "textures/items/clothing/lower/ghillie_snow_bottom"
+    },
+    "ghillie_snow_top": {
+      "textures": "textures/items/clothing/top/ghillie_snow_top"
+    },
+    "gorka_bottom": {
+      "textures": "textures/items/clothing/lower/gorka_bottom"
+    },
+    "gorka_top": {
+      "textures": "textures/items/clothing/top/gorka_top"
+    },
+    "great_helmet": {
+      "textures": "textures/items/armor/great_helmet"
+    },
+    "hard_blue": {
+      "textures": "textures/items/armor/hard_blue"
+    },
+    "hard_orange": {
+      "textures": "textures/items/armor/hard_orange"
+    },
+    "hard_red": {
+      "textures": "textures/items/armor/hard_red"
+    },
+    "hard_white": {
+      "textures": "textures/items/armor/hard_white"
+    },
+    "hard_yellow": {
+      "textures": "textures/items/armor/hard_yellow"
+    },
+    "hawaiian_black": {
+      "textures": "textures/items/clothing/top/hawaiian_black"
+    },
+    "hawaiian_red": {
+      "textures": "textures/items/clothing/top/hawaiian_red"
+    },
+    "hazmat_white_bottom": {
+      "textures": "textures/items/clothing/lower/hazmat_white_bottom"
+    },
+    "hazmat_white_top": {
+      "textures": "textures/items/clothing/top/hazmat_white_top"
+    },
+    "hazmat_yellow_bottom": {
+      "textures": "textures/items/clothing/lower/hazmat_yellow_bottom"
+    },
+    "hazmat_yellow_top": {
+      "textures": "textures/items/clothing/top/hazmat_yellow_top"
+    },
+    "headlamp": {
+      "textures": "textures/items/armor/headlamp"
+    },
+    "hero_flannel": {
+      "textures": "textures/items/clothing/top/hero_flannel"
+    },
+    "hiking_black": {
+      "textures": "textures/items/clothing/top/hiking_black"
+    },
+    "hiking_blue": {
+      "textures": "textures/items/clothing/top/hiking_blue"
+    },
+    "hoodie_black": {
+      "textures": "textures/items/clothing/top/hoodie_black"
+    },
+    "hoodie_blue": {
+      "textures": "textures/items/clothing/top/hoodie_blue"
+    },
+    "hoodie_green": {
+      "textures": "textures/items/clothing/top/hoodie_green"
+    },
+    "hoodie_red": {
+      "textures": "textures/items/clothing/top/hoodie_red"
+    },
+    "hoodie_white": {
+      "textures": "textures/items/clothing/top/hoodie_white"
+    },
+    "hoodie_yellow": {
+      "textures": "textures/items/clothing/top/hoodie_yellow"
+    },
+    "hunting_brown": {
+      "textures": "textures/items/armor/hunting_brown"
+    },
+    "hunting_hat": {
+      "textures": "textures/items/armor/hunting_hat"
+    },
+    "hunting_navy": {
+      "textures": "textures/items/armor/hunting_navy"
+    },
+    "jean_black": {
+      "textures": "textures/items/clothing/lower/jean_black"
+    },
+    "jean_blue": {
+      "textures": "textures/items/clothing/lower/jean_blue"
+    },
+    "jean_brown": {
+      "textures": "textures/items/clothing/lower/jean_brown"
+    },
+    "jean_light": {
+      "textures": "textures/items/clothing/lower/jean_light"
+    },
+    "khaki_light": {
+      "textures": "textures/items/clothing/lower/khaki_light"
+    },
+    "leather_black": {
+      "textures": "textures/items/clothing/top/leather_black"
+    },
+    "leather_brown": {
+      "textures": "textures/items/clothing/top/leather_brown"
+    },
+    "maid_bonnet": {
+      "textures": "textures/items/armor/maid_bonnet"
+    },
+    "maid_bottom": {
+      "textures": "textures/items/clothing/lower/maid_bottom"
+    },
+    "maid_top": {
+      "textures": "textures/items/clothing/top/maid_top"
+    },
+    "mask_fawkes": {
+      "textures": "textures/items/armor/mask_fawkes"
+    },
+    "mask_funni": {
+      "textures": "textures/items/armor/mask_funni"
+    },
+    "mask_troll": {
+      "textures": "textures/items/armor/mask_troll"
+    },
+    "night_goggles": {
+      "textures": "textures/items/armor/night_goggles"
+    },
+    "overall_black": {
+      "textures": "textures/items/clothing/lower/overall_black"
+    },
+    "overall_blue": {
+      "textures": "textures/items/clothing/lower/overall_blue"
+    },
+    "overall_brown": {
+      "textures": "textures/items/clothing/lower/overall_brown"
+    },
+    "paramedic_bottom": {
+      "textures": "textures/items/clothing/lower/paramedic_bottom"
+    },
+    "paramedic_top": {
+      "textures": "textures/items/clothing/top/paramedic_top"
+    },
+    "peaked_green": {
+      "textures": "textures/items/armor/peaked_green"
+    },
+    "peaked_tan": {
+      "textures": "textures/items/armor/peaked_tan"
+    },
+    "peaked_white": {
+      "textures": "textures/items/armor/peaked_white"
+    },
+    "plague_bottom": {
+      "textures": "textures/items/clothing/lower/plague_bottom"
+    },
+    "plague_hat": {
+      "textures": "textures/items/armor/plague_hat"
+    },
+    "plague_top": {
+      "textures": "textures/items/clothing/top/plague_top"
+    },
+    "plaid_blue": {
+      "textures": "textures/items/clothing/top/plaid_blue"
+    },
+    "plaid_gray": {
+      "textures": "textures/items/clothing/top/plaid_gray"
+    },
+    "plaid_olive": {
+      "textures": "textures/items/clothing/top/plaid_olive"
+    },
+    "plaid_red": {
+      "textures": "textures/items/clothing/top/plaid_red"
+    },
+    "plaid_tan": {
+      "textures": "textures/items/clothing/top/plaid_tan"
+    },
+    "plaid_white": {
+      "textures": "textures/items/clothing/top/plaid_white"
+    },
+    "plate_vest_gray": {
+      "textures": "textures/items/armor/plate_vest_gray"
+    },
+    "plate_vest_olive": {
+      "textures": "textures/items/armor/plate_vest_olive"
+    },
+    "plate_vest_tan": {
+      "textures": "textures/items/armor/plate_vest_tan"
+    },
+    "plate_vest_white": {
+      "textures": "textures/items/armor/plate_vest_white"
+    },
+    "police_bottom": {
+      "textures": "textures/items/clothing/lower/police_bottom"
+    },
+    "police_hat": {
+      "textures": "textures/items/armor/police_hat"
+    },
+    "police_riot": {
+      "textures": "textures/items/armor/police_riot"
+    },
+    "police_special_bottom": {
+      "textures": "textures/items/clothing/lower/police_special_bottom"
+    },
+    "police_special_top": {
+      "textures": "textures/items/clothing/top/police_special_top"
+    },
+    "police_top": {
+      "textures": "textures/items/clothing/top/police_top"
+    },
+    "police_vest": {
+      "textures": "textures/items/armor/police_vest"
+    },
+    "press_vest": {
+      "textures": "textures/items/armor/press_vest"
+    },
+    "prisoner_bottom": {
+      "textures": "textures/items/clothing/lower/prisoner_bottom"
+    },
+    "prisoner_top": {
+      "textures": "textures/items/clothing/top/prisoner_top"
+    },
+    "puffer_black": {
+      "textures": "textures/items/clothing/top/puffer_black"
+    },
+    "puffer_blue": {
+      "textures": "textures/items/clothing/top/puffer_blue"
+    },
+    "reflective_lime": {
+      "textures": "textures/items/armor/reflective_lime"
+    },
+    "reflective_orange": {
+      "textures": "textures/items/armor/reflective_orange"
+    },
+    "reflective_yellow": {
+      "textures": "textures/items/armor/reflective_yellow"
+    },
+    "respirator_mask": {
+      "textures": "textures/items/armor/respirator_mask"
+    },
+    "shemagh_blue": {
+      "textures": "textures/items/armor/shemagh_blue"
+    },
+    "shemagh_brown": {
+      "textures": "textures/items/armor/shemagh_brown"
+    },
+    "shemagh_gray": {
+      "textures": "textures/items/armor/shemagh_gray"
+    },
+    "shemagh_olive": {
+      "textures": "textures/items/armor/shemagh_olive"
+    },
+    "shemagh_red": {
+      "textures": "textures/items/armor/shemagh_red"
+    },
+    "shemagh_tan": {
+      "textures": "textures/items/armor/shemagh_tan"
+    },
+    "skimask_black": {
+      "textures": "textures/items/armor/skimask_black"
+    },
+    "slack_black": {
+      "textures": "textures/items/clothing/lower/slack_black"
+    },
+    "spec_helmet": {
+      "textures": "textures/items/armor/spec_helmet"
+    },
+    "special_bottom": {
+      "textures": "textures/items/clothing/lower/special_bottom"
+    },
+    "special_top": {
+      "textures": "textures/items/clothing/top/special_top"
+    },
+    "stab_vest_gray": {
+      "textures": "textures/items/armor/stab_vest_gray"
+    },
+    "stab_vest_tan": {
+      "textures": "textures/items/armor/stab_vest_tan"
+    },
+    "stab_vest_white": {
+      "textures": "textures/items/armor/stab_vest_white"
+    },
+    "striped_blue": {
+      "textures": "textures/items/clothing/top/striped_blue"
+    },
+    "striped_white": {
+      "textures": "textures/items/clothing/top/striped_white"
+    },
+    "stripeds_black": {
+      "textures": "textures/items/clothing/top/stripeds_black"
+    },
+    "suede_brown": {
+      "textures": "textures/items/clothing/top/suede_brown"
+    },
+    "suit_top_black": {
+      "textures": "textures/items/clothing/top/suit_top_black"
+    },
+    "suspender_black": {
+      "textures": "textures/items/clothing/lower/suspender_black"
+    },
+    "sweater_green": {
+      "textures": "textures/items/clothing/top/sweater_green"
+    },
+    "sweater_white": {
+      "textures": "textures/items/clothing/top/sweater_white"
+    },
+    "tactical_green": {
+      "textures": "textures/items/clothing/top/tactical_green"
+    },
+    "tactical_helmet_black": {
+      "textures": "textures/items/armor/tactical_helmet_black"
+    },
+    "tactical_helmet_olive": {
+      "textures": "textures/items/armor/tactical_helmet_olive"
+    },
+    "tactical_helmet_tan": {
+      "textures": "textures/items/armor/tactical_helmet_tan"
+    },
+    "tactical_helmet_white": {
+      "textures": "textures/items/armor/tactical_helmet_white"
+    },
+    "tactical_navy": {
+      "textures": "textures/items/clothing/top/tactical_navy"
+    },
+    "tactical_red": {
+      "textures": "textures/items/clothing/top/tactical_red"
+    },
+    "tactical_tan": {
+      "textures": "textures/items/clothing/top/tactical_tan"
+    },
+    "tactical_vest_black": {
+      "textures": "textures/items/armor/tactical_vest_black"
+    },
+    "tactical_vest_olive": {
+      "textures": "textures/items/armor/tactical_vest_olive"
+    },
+    "tactical_vest_tan": {
+      "textures": "textures/items/armor/tactical_vest_tan"
+    },
+    "tactical_vest_white": {
+      "textures": "textures/items/armor/tactical_vest_white"
+    },
+    "tactical_white": {
+      "textures": "textures/items/clothing/top/tactical_white"
+    },
+    "trackpants_black": {
+      "textures": "textures/items/clothing/lower/trackpants_black"
+    },
+    "trackpants_blue": {
+      "textures": "textures/items/clothing/lower/trackpants_blue"
+    },
+    "trackpants_red": {
+      "textures": "textures/items/clothing/lower/trackpants_red"
+    },
+    "tracksuit_black": {
+      "textures": "textures/items/clothing/top/tracksuit_black"
+    },
+    "tracksuit_blue": {
+      "textures": "textures/items/clothing/top/tracksuit_blue"
+    },
+    "tracksuit_red": {
+      "textures": "textures/items/clothing/top/tracksuit_red"
+    },
+    "tshirt_black": {
+      "textures": "textures/items/clothing/top/tshirt_black"
+    },
+    "tshirt_blue": {
+      "textures": "textures/items/clothing/top/tshirt_blue"
+    },
+    "tshirt_green": {
+      "textures": "textures/items/clothing/top/tshirt_green"
+    },
+    "tshirt_red": {
+      "textures": "textures/items/clothing/top/tshirt_red"
+    },
+    "tshirt_white": {
+      "textures": "textures/items/clothing/top/tshirt_white"
+    },
+    "tshirt_yellow": {
+      "textures": "textures/items/clothing/top/tshirt_yellow"
+    },
+    "un_helmet": {
+      "textures": "textures/items/armor/un_helmet"
+    },
+    "ushanka": {
+      "textures": "textures/items/armor/ushanka"
+    },
+    "varsity_blue": {
+      "textures": "textures/items/clothing/top/varsity_blue"
+    },
+    "varsity_brown": {
+      "textures": "textures/items/clothing/top/varsity_brown"
+    },
+    "varsity_green": {
+      "textures": "textures/items/clothing/top/varsity_green"
+    },
+    "varsity_red": {
+      "textures": "textures/items/clothing/top/varsity_red"
+    },
+    "webbing_black": {
+      "textures": "textures/items/armor/webbing_black"
+    },
+    "webbing_brown": {
+      "textures": "textures/items/armor/webbing_brown"
+    },
+    "webbing_green": {
+      "textures": "textures/items/armor/webbing_green"
+    },
+    "webbing_tan": {
+      "textures": "textures/items/armor/webbing_tan"
+    },
+    "webbing_white": {
+      "textures": "textures/items/armor/webbing_white"
+    },
+    "welder_mask": {
+      "textures": "textures/items/armor/welder_mask"
     }
   }
 }

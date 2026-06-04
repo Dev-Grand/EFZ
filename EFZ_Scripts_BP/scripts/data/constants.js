@@ -1,4 +1,6 @@
-export const EFZ_VERSION = "1.0.0";
+export const EFZ_VERSION = "1.0.11";
+
+export const EFZ_MENU_ITEM_ID = "efz:gear_menu";
 
 export const BROKEN_LEG_TAG = "efz_broken_leg";
 
@@ -59,7 +61,8 @@ export const INFECTION_ATTACKER_TYPES = [
 
 export const INFECTION_ATTACKER_PREFIXES = [
   "efz:zombie",
-  "efz:husk"
+  "efz:husk",
+  "efz:infected_"
 ];
 
 export const INFECTION_DISEASES = [

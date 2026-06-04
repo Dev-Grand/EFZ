@@ -7,38 +7,13 @@
         "default": "spider"
       },
       "textures": {
-        "default": "textures/entity/efz/husks/husk",
-        "default1": "textures/entity/efz/husks/husk1",
-        "default2": "textures/entity/efz/husks/husk2",
-        "default3": "textures/entity/efz/husks/husk3",
-        "default4": "textures/entity/efz/husks/husk4",
-        "default5": "textures/entity/efz/husks/husk5",
-        "default6": "textures/entity/efz/husks/husk6",
-        "default7": "textures/entity/efz/husks/husk7",
-        "default8": "textures/entity/efz/husks/husk8",
-        "default9": "textures/entity/efz/husks/husk9",
-        "default10": "textures/entity/efz/husks/husk10",
-        "default11": "textures/entity/efz/husks/husk11",
-        "default12": "textures/entity/efz/husks/husk12",
-        "default13": "textures/entity/efz/husks/husk13",
-        "default14": "textures/entity/efz/husks/husk14",
-        "default15": "textures/entity/efz/husks/husk15",
-        "default16": "textures/entity/efz/husks/husk16",
-        "default17": "textures/entity/efz/husks/husk17",
-        "default18": "textures/entity/efz/husks/husk18",
-        "default19": "textures/entity/efz/husks/husk19",
-        "default20": "textures/entity/efz/husks/husk20",
-        "default21": "textures/entity/efz/husks/husk21",
-        "default22": "textures/entity/efz/husks/husk22",
-        "default23": "textures/entity/efz/husks/husk23",
-        "default24": "textures/entity/efz/husks/husk24"
+        "default": "textures/entity/efz/husks/husk"
       },
       "geometry": {
         "default": "geometry.zombie.husk.v1.8"
       },
       "scripts": {
         "pre_animation": [
-          "variable.Xvar = query.anim_time>0 ? variable.Xvar : Math.random(0,24);",
           "variable.tcos0 = (Math.cos(query.modified_distance_moved * 38.17) * query.modified_move_speed / variable.gliding_speed_value) * 57.3;"
         ]
       },
