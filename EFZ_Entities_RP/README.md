@@ -39,8 +39,10 @@ For living players, scripts still assign each player a persistent random survivo
 - Husks: 25 PNG textures in `textures/entity/efz/husks/`.
 - Source zombies were TGA files in `My data/zombie/`; they were converted to PNG for safer Bedrock resource-pack use.
 - Source husks were already PNG files and were copied into the pack.
-- Zombie and husk client entities reuse the vanilla zombie/husk geometry and animation-controller set, then swap only the texture through the EFZ render-controller arrays. This keeps random skins while avoiding purple/missing-animation regressions.
-- The generated variant list for future randomization is `EFZ_Scripts_BP/scripts/data/zombieVariants.generated.json`.
+- Zombie and husk texture randomization is now handled by generated EFZ custom infected entities, not by random render-controller texture arrays.
+- Each generated infected entity keeps vanilla-style zombie/husk geometry and animation-controller wiring, but owns exactly one fixed texture. Scripts replace natural `minecraft:zombie` and `minecraft:husk` spawns with a random `efz:infected_*` variant.
+- The vanilla `minecraft:zombie` and `minecraft:husk` client entities remain as fixed-texture fallbacks only.
+- The generated variant/entity list is `EFZ_Scripts_BP/scripts/data/zombieVariants.generated.json`.
 
 ## Random Skin Selector Validation
 
@@ -50,6 +52,11 @@ Run this repo check after adding/removing zombie or husk skins to ensure all sel
 
 It validates:
 - texture files on disk,
-- texture short-names in `entity/zombie.entity.json` and `entity/husk.entity.json`,
-- texture arrays in `render_controllers/zombie_husk.render_controllers.json`,
+- generated BP infected entity files,
+- generated RP infected client entity files,
+- the fixed infected render controller,
 - and `EFZ_Scripts_BP/scripts/data/zombieVariants.generated.json`.
+
+Regenerate infected variants after adding/removing zombie or husk textures:
+
+- `node tools/generateInfectedVariants.mjs`

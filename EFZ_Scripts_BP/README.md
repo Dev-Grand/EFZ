@@ -39,7 +39,7 @@ JavaScript gameplay logic for the EFZ server.
   - Makes grave lootable by other players instantly (public hardcore loot).
   - Deletes grave after 15 minutes.
   - Loot interaction uses an in-game menu with item-by-item take and take-all options.
-  - Does not force `keepinventory true`; world rule is respected.
+  - Forces `keepinventory true` so vanilla drops do not bypass corpse looting.
 - Survivor skin assignment:
   - Randomly assigns each player one persistent survivor type from `type_0` through `type_6`.
   - Stores the assignment in player dynamic properties.

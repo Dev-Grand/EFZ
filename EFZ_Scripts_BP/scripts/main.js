@@ -11,6 +11,7 @@ import { registerGraveSystem } from "./systems/graves.js";
 import { registerPlayerMenuSystem } from "./systems/playerMenus.js";
 import { registerRadiationSystem } from "./systems/radiation.js";
 import { registerSafeZonePvPSystem } from "./systems/safeZonePvP.js";
+import { registerInfectedVariantSystem } from "./systems/infectedVariants.js";
 
 const systems = [
   ["infection", registerInfectionSystem],
@@ -23,7 +24,8 @@ const systems = [
   ["graves", registerGraveSystem],
   ["playerMenus", registerPlayerMenuSystem],
   ["radiation", registerRadiationSystem],
-  ["safeZonePvP", registerSafeZonePvPSystem]
+  ["safeZonePvP", registerSafeZonePvPSystem],
+  ["infectedVariants", registerInfectedVariantSystem]
 ];
 
 for (const [name, register] of systems) {

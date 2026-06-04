@@ -1,8 +1,8 @@
 import { ActionFormData, ModalFormData } from "@minecraft/server-ui";
-import { system, world } from "@minecraft/server";
+import { ItemLockMode, ItemStack, system, world } from "@minecraft/server";
 import { EFZ_LINKS } from "../data/links.js";
 import { PATCH_NOTES } from "../data/patchNotes.js";
-import { SCOREBOARD_OBJECTIVES } from "../data/constants.js";
+import { EFZ_MENU_ITEM_ID, SCOREBOARD_OBJECTIVES } from "../data/constants.js";
 
 const ADMIN_COMMANDS = [
   "!efz add money <amount> <user>",
@@ -20,6 +20,93 @@ const STAT_LABELS = [
   [SCOREBOARD_OBJECTIVES.moneySpent, "Money Spent", "$"],
   [SCOREBOARD_OBJECTIVES.playtimeMinutes, "Playtime", "", " min"]
 ];
+
+const COMMAND_THROTTLE_MS = 1000;
+const MENU_ITEM_TARGET_SLOT = 8;
+const lastCommandAtByPlayerId = new Map();
+
+function normalizeCommandMessage(rawMessage) {
+  return String(rawMessage ?? "").trim().toLowerCase();
+}
+
+function shouldThrottleCommand(player) {
+  const now = Date.now();
+  const previous = lastCommandAtByPlayerId.get(player.id) ?? 0;
+  if (now - previous < COMMAND_THROTTLE_MS) return true;
+
+  lastCommandAtByPlayerId.set(player.id, now);
+  return false;
+}
+
+function getInventoryContainer(player) {
+  try {
+    return player.getComponent("minecraft:inventory")?.container;
+  } catch {
+    return undefined;
+  }
+}
+
+function createMenuItem() {
+  const item = new ItemStack(EFZ_MENU_ITEM_ID, 1);
+  item.lockMode = ItemLockMode.slot;
+  item.keepOnDeath = true;
+  item.nameTag = "EFZ Gear";
+  return item;
+}
+
+function isMenuItem(item) {
+  return item?.typeId === EFZ_MENU_ITEM_ID;
+}
+
+function findMenuItemSlots(container) {
+  const slots = [];
+  for (let slot = 0; slot < container.size; slot++) {
+    if (isMenuItem(container.getItem(slot))) slots.push(slot);
+  }
+  return slots;
+}
+
+function findFirstEmptySlot(container) {
+  for (let slot = 0; slot < container.size; slot++) {
+    if (!container.getItem(slot)) return slot;
+  }
+  return undefined;
+}
+
+function lockExistingMenuItem(container, slot) {
+  const item = container.getItem(slot);
+  if (!isMenuItem(item)) return;
+
+  item.lockMode = ItemLockMode.slot;
+  item.keepOnDeath = true;
+  if (!item.nameTag) item.nameTag = "EFZ Gear";
+  container.setItem(slot, item);
+}
+
+function ensureMenuItem(player) {
+  const container = getInventoryContainer(player);
+  if (!container) return;
+
+  const menuSlots = findMenuItemSlots(container);
+  if (menuSlots.length > 0) {
+    lockExistingMenuItem(container, menuSlots[0]);
+    for (const duplicateSlot of menuSlots.slice(1)) {
+      container.setItem(duplicateSlot, undefined);
+    }
+    return;
+  }
+
+  const targetSlot = !container.getItem(MENU_ITEM_TARGET_SLOT)
+    ? MENU_ITEM_TARGET_SLOT
+    : findFirstEmptySlot(container);
+
+  if (targetSlot === undefined) {
+    player.sendMessage("§c[EFZ] Inventory full. Free one slot to receive the EFZ Gear menu item.");
+    return;
+  }
+
+  container.setItem(targetSlot, createMenuItem());
+}
 
 function getMoneyObjective() {
   return world.scoreboard.getObjective(SCOREBOARD_OBJECTIVES.money)
@@ -288,42 +375,101 @@ function executeAdminCommand(player, rawMessage) {
   sendMoneyResult(player, action, target, amount, before, after);
 }
 
+function openPlayerMenuFromTrigger(player, { throttle = true } = {}) {
+  if (throttle && shouldThrottleCommand(player)) return;
+
+  system.run(() => {
+    ensureMenuItem(player);
+    void showPlayerMenu(player).catch((error) => {
+      console.warn(`[EFZ Menu] Failed: ${error}`);
+      player.sendMessage("§c[EFZ] Menu failed to open. Please close chat/inventory and try the Gear item again.");
+    });
+  });
+}
+
+function handleEfzChatCommand(event, { canCancel }) {
+  const rawMessage = String(event.message ?? "").trim();
+  const message = normalizeCommandMessage(rawMessage);
+  const player = event.sender;
+
+  if (!player || !message.startsWith("!efz")) return false;
+  if (message !== "!efz" && message !== "!efzadmin" && !message.startsWith("!efz ")) return false;
+  if (shouldThrottleCommand(player)) return true;
+
+  if (canCancel) event.cancel = true;
+
+  if (!canCancel) {
+    player.sendMessage("§7[EFZ] Opening menu. If you see your command in chat, your runtime is using fallback chat handling.");
+  }
+
+  if (message === "!efz") {
+    openPlayerMenuFromTrigger(player, { throttle: false });
+    return true;
+  }
+
+  if (message === "!efzadmin") {
+    system.run(() => {
+      if (!isAdmin(player)) {
+        player.sendMessage("§c[EFZ] Admin only command.");
+        return;
+      }
+
+      void showAdminMenu(player).catch((error) => {
+        console.warn(`[EFZ Admin] Failed: ${error}`);
+        player.sendMessage("§c[EFZ] Admin menu failed to open. Try the text commands instead.");
+      });
+    });
+    return true;
+  }
+
+  system.run(() => executeAdminCommand(player, rawMessage));
+  return true;
+}
+
 export function registerPlayerMenuSystem() {
-  world.beforeEvents.chatSend.subscribe((event) => {
-    const rawMessage = event.message.trim();
-    const message = rawMessage.toLowerCase();
-    const player = event.sender;
+  system.beforeEvents.startup.subscribe((event) => {
+    event.itemComponentRegistry.registerCustomComponent("efz:gear_menu", {
+      onUse: ({ source }) => {
+        if (source) openPlayerMenuFromTrigger(source);
+      }
+    });
+  });
 
-    if (message === "!efz") {
-      event.cancel = true;
-      system.run(() => {
-        void showPlayerMenu(player).catch((error) => {
-          console.warn(`[EFZ Menu] Failed: ${error}`);
-          player.sendMessage("§c[EFZ] Menu failed to open. Please close chat and try !efz again.");
-        });
-      });
-      return;
+  world.afterEvents.playerSpawn.subscribe((event) => {
+    system.run(() => ensureMenuItem(event.player));
+  });
+
+  world.afterEvents.itemUse.subscribe((event) => {
+    if (event.itemStack?.typeId !== EFZ_MENU_ITEM_ID) return;
+    openPlayerMenuFromTrigger(event.source);
+  });
+
+  system.runInterval(() => {
+    for (const player of world.getAllPlayers()) {
+      ensureMenuItem(player);
     }
+  }, 100);
 
-    if (message === "!efzadmin") {
-      event.cancel = true;
-      system.run(() => {
-        if (!isAdmin(player)) {
-          player.sendMessage("§c[EFZ] Admin only command.");
-          return;
-        }
+  const beforeChat = world.beforeEvents?.chatSend;
+  const afterChat = world.afterEvents?.chatSend;
 
-        void showAdminMenu(player).catch((error) => {
-          console.warn(`[EFZ Admin] Failed: ${error}`);
-          player.sendMessage("§c[EFZ] Admin menu failed to open. Try the text commands instead.");
-        });
-      });
-      return;
-    }
+  if (beforeChat?.subscribe) {
+    beforeChat.subscribe((event) => {
+      handleEfzChatCommand(event, { canCancel: true });
+    });
+    console.warn("[EFZ Menu] Registered before-chat command handler.");
+  } else {
+    console.warn("[EFZ Menu] beforeEvents.chatSend unavailable; using fallback chat handler.");
+  }
 
-    if (message.startsWith("!efz ")) {
-      event.cancel = true;
-      system.run(() => executeAdminCommand(player, rawMessage));
-    }
+  if (afterChat?.subscribe) {
+    afterChat.subscribe((event) => {
+      handleEfzChatCommand(event, { canCancel: false });
+    });
+    console.warn("[EFZ Menu] Registered after-chat fallback command handler.");
+  }
+
+  world.afterEvents.playerLeave.subscribe((event) => {
+    lastCommandAtByPlayerId.delete(event.playerId);
   });
 }

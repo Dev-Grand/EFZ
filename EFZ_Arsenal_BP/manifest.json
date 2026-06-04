@@ -4,20 +4,20 @@
     "name": "EFZ Arsenal BP",
     "description": "Behavior pack for EFZ items, gear, medicine, food, weapons, and armor.",
     "uuid": "c86e559e-5400-416c-99dc-69666979d78c",
-    "version": [1, 0, 0],
+    "version": [1, 0, 4],
     "min_engine_version": [1, 21, 0]
   },
   "modules": [
     {
       "type": "data",
       "uuid": "e74a4ec2-831a-4ae2-b71f-882ca83e3b52",
-      "version": [1, 0, 0]
+      "version": [1, 0, 4]
     }
   ],
   "dependencies": [
     {
       "uuid": "c7f146f3-4269-45dc-8d8b-43d8e739f0d5",
-      "version": [1, 0, 0]
+      "version": [1, 0, 4]
     }
   ]
 }

@@ -5,6 +5,7 @@ import {
   EFZ_UI_UPDATE_INTERVAL_TICKS,
   INFECTION_ATTACKER_PREFIXES,
   INFECTION_ATTACKER_TYPES,
+  RADIATION_CONFIG,
   SCOREBOARD_OBJECTIVES,
   INFECTION_TAGS,
   BROKEN_LEG_TAG
@@ -71,6 +72,35 @@ function ensurePlayerStats(player) {
   ensureObjectiveScore(EXTRA_OBJECTIVES.playtimeMinutes, player, 0);
 }
 
+function formatRadiationSeconds(seconds) {
+  if (seconds < 100) return seconds.toFixed(1);
+  return Math.floor(seconds).toString();
+}
+
+function getNextRadiationThreshold(stage) {
+  const thresholds = RADIATION_CONFIG.levelThresholdsSeconds;
+  if (stage <= 0) return thresholds.level1;
+  if (stage === 1) return thresholds.level2;
+  if (stage === 2) return thresholds.level3;
+  return null;
+}
+
+function formatRadiationStatus(radiation) {
+  if (!radiation.inZone && radiation.exposureSeconds <= 0) return undefined;
+
+  const exposure = Math.max(0, radiation.exposureSeconds);
+  const exposureText = formatRadiationSeconds(exposure);
+  const nextThreshold = getNextRadiationThreshold(radiation.stage);
+  const levelText = radiation.stage > 0 ? `L${radiation.stage}` : "L0";
+  const directionText = radiation.inZone ? "RAD" : "RAD FADING";
+
+  if (nextThreshold === null) {
+    return `${directionText} ${levelText} ${exposureText}s`;
+  }
+
+  return `${directionText} ${levelText} ${exposureText}/${nextThreshold}s`;
+}
+
 function buildStatusSegments(player) {
   const statuses = [];
 
@@ -78,11 +108,8 @@ function buildStatusSegments(player) {
   if (player.hasTag(BROKEN_LEG_TAG)) statuses.push("BROKEN LEG");
 
   const radiation = getRadiationStatusForPlayer(player.id);
-  if (radiation.stage > 0) {
-    statuses.push(`RADIATION L${radiation.stage}`);
-  } else if (radiation.inZone) {
-    statuses.push("RADIATION");
-  }
+  const radiationText = formatRadiationStatus(radiation);
+  if (radiationText) statuses.push(radiationText);
 
   return statuses;
 }

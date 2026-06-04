@@ -4,14 +4,14 @@
     "name": "EFZ Arsenal RP",
     "description": "Resource pack for EFZ item textures, icons, and gear visuals.",
     "uuid": "c7f146f3-4269-45dc-8d8b-43d8e739f0d5",
-    "version": [1, 0, 0],
+    "version": [1, 0, 4],
     "min_engine_version": [1, 21, 0]
   },
   "modules": [
     {
       "type": "resources",
       "uuid": "6b1621d2-4247-40e6-91eb-6869da5a91c2",
-      "version": [1, 0, 0]
+      "version": [1, 0, 4]
     }
   ]
 }
